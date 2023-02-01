@@ -52,6 +52,7 @@ public class FormViewModel extends UserForm {
 		return "";
 	}
 
+
 	public void doAfterCompose(Component comp) {
 		Div newDiv = new Div();
 		comp.appendChild(newDiv); //append the newDiv before creating children using MVVM viewModels

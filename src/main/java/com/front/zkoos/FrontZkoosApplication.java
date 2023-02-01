@@ -9,8 +9,8 @@ import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.front.zkoos.*"})
+@ImportResource("classpath:metainfo/zk/zkscopes-config.xml")
 @PropertySource(value = "classpath:front.properties", encoding = "UTF-8")
-//@ImportResource("classpath:metainfo/zk/zkscopes-config.xml")
 public class FrontZkoosApplication {
 
 	public static void main(String[] args) {

@@ -3,6 +3,7 @@ package com.front.zkoos.module.form;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.front.zkoos.module.form.dto.GeneralDto;
 import com.front.zkoos.util.connection.ConnectionService;
+import com.front.zkoos.util.connection.MyProperties;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.slf4j.Logger;
@@ -11,11 +12,16 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.zkoss.zk.ui.select.annotation.WireVariable;
 
 @Service
 public class RatingsService implements IRatingService{
 
     private final Logger logger = LoggerFactory.getLogger(RatingsService.class);
+
+//    @WireVariable
+//    private MyProperties myProperties;
+
 
     @Override
     public GeneralDto saveRatings(Ratings ratings) throws JsonProcessingException {
@@ -24,11 +30,13 @@ public class RatingsService implements IRatingService{
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         JsonObject properties = new JsonObject();
-        properties.addProperty("idAlumno", 1);
-        properties.addProperty("idMateria", 2);
-        properties.addProperty("calificacion", 9.8);
+        properties.addProperty("idAlumno", ratings.getIdAlumno());
+        properties.addProperty("idMateria", ratings.getIdMateria());
+        properties.addProperty("calificacion", ratings.getCalificacion());
         HttpEntity<String> requestEntity = new HttpEntity<>(properties.toString(), headers);
         ConnectionService connectionService = new ConnectionService();
+
+//        logger.info("################## myProperties {}",myProperties.getHttpSchoolUrl());
 
         ResponseEntity<String>  dataResponse = connectionService.postRest("http://localhost:8083/ratings" , requestEntity);
         logger.info("################### termino proceso Validation{}", dataResponse);

@@ -1,46 +1,16 @@
 package com.front.zkoos.module.form;
 
 public class UserForm {
-	private RandomStringGenerator rsg = new RandomStringGenerator(4);
 
-	private User user = new User();
-	private String retypedPassword;
-	private String captcha = rsg.getRandomString(), captchaInput;
+	private Ratings ratings = new Ratings();
 
-	public User getUser() {
-		return user;
+
+	public Ratings getRatings() {
+		return ratings;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public String getRetypedPassword() {
-		return retypedPassword;
-	}
-
-	public void setRetypedPassword(String retypedPassword) {
-		this.retypedPassword = retypedPassword;
-	}
-
-	public String getCaptcha() {
-		return captcha;
-	}
-
-	public void setCaptcha(String captcha) {
-		this.captcha = captcha;
-	}
-
-	public String getCaptchaInput() {
-		return captchaInput;
-	}
-
-	public void setCaptchaInput(String captchaInput) {
-		this.captchaInput = captchaInput;
-	}
-	
-	public void regenerateCaptcha() {
-		this.captcha = rsg.getRandomString();
+	public void setRatings(Ratings ratings) {
+		this.ratings = ratings;
 	}
 
 }

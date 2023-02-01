@@ -46,8 +46,11 @@
 						<vlayout>
 							<label visible="@load(empty vmsgs)"
 								   value="@load(empty vmsgs ? 'Form successfully submitted!' : '', before='submit')" />
-							<button label="Consultar"
-									onClick="@command('goToCourseList')" width="100px" height="30px" />
+							<button label="consulta">
+								<attribute name="onClick">
+									Executions.createComponents("/zul/ratingslist.zul",carga,null);
+								</attribute>
+							</button>
 						</vlayout>
 					</cell>
 				</row>

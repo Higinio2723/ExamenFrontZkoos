@@ -8,9 +8,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.*;
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.InputEvent;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
+import org.zkoss.zul.Div;
 import org.zkoss.zul.Window;
 
 import java.util.HashMap;
@@ -50,16 +52,10 @@ public class FormViewModel extends UserForm {
 		return "";
 	}
 
-	/**
-	 * Load the course list content
-	 */
-	@Command
-	public void goToCourseList(){
-
-		final HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("firstName", "");
-		map.put("lastName", "");
-		Executions.createComponents("/listData", null, map);
+	public void doAfterCompose(Component comp) {
+		Div newDiv = new Div();
+		comp.appendChild(newDiv); //append the newDiv before creating children using MVVM viewModels
+		Executions.createComponents("mvvminc.zul", newDiv, null);
 	}
 
 }

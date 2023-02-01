@@ -12,6 +12,9 @@ public class MainController {
         return "form_main";
     }
 
-
+    @GetMapping("/listData")
+    public String listData() {
+        return "ratingslist";
+    }
 
 }

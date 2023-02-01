@@ -7,7 +7,7 @@ package com.front.zkoos.util.contants;
 public class ApplicationConstants {
 
     public static final String HOME_PAGE = "~./form_main.zul";
-    public static final String RATINGS_LIST_PAGE = "~./zul/ratings-list.zul";
+    public static final String RATINGS_LIST_PAGE = "~./zul/ratingslist.zul";
 
     public static final String ADMINISTRATION_TEMPLATE_PAGE = "~./zul/administration.zul";
 

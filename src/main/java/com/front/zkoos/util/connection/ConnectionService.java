@@ -19,7 +19,7 @@ public class ConnectionService implements IConnectionService{
     private final Logger logger = LoggerFactory.getLogger(ConnectionService.class);
 
     @Override
-    public ResponseEntity<String> postRest(String uri, HttpEntity<MultiValueMap<String, Object>> requestEntity){
+    public ResponseEntity<String> postRest(String uri, HttpEntity<String> requestEntity){
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = null;
         try{

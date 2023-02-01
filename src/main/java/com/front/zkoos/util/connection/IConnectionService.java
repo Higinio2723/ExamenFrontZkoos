@@ -7,7 +7,7 @@ import org.springframework.util.MultiValueMap;
 
 public interface IConnectionService {
 
-    ResponseEntity<String> postRest(String uri, HttpEntity<MultiValueMap<String, Object>> requestEntity);
+    ResponseEntity<String> postRest(String uri, HttpEntity<String> requestEntity);
 
     JsonNode postBodyRest(String uri, HttpEntity<String> requestEntity);
 

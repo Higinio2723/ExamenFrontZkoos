@@ -9,6 +9,10 @@ public interface IConnectionService {
 
     ResponseEntity<String> postRest(String uri, HttpEntity<String> requestEntity);
 
+    ResponseEntity<String> putRest(String uri, HttpEntity<String> requestEntity);
+
+    ResponseEntity<String> deleteRest(String uri, HttpEntity<String> requestEntity);
+
     JsonNode postBodyRest(String uri, HttpEntity<String> requestEntity);
 
     JsonNode getRest(String uri, HttpEntity<MultiValueMap<String, Object>> requestEntity );

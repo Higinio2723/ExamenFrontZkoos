@@ -81,13 +81,6 @@ public class RatingsService implements IRatingService{
         ObjectMapper objectMapper = new ObjectMapper();
 
         logger.info("################### termino proceso Validation{}", dataResponse);
-//        String data = dataResponse.getBody();
-//        Gson gson = new Gson();
-//        GeneralDto result = gson.fromJson(data,GeneralDto.class);
-//
-//        DataResponse<PdfViewDto> result = objectMapper.readValue(jsonNode.toString(), DataResponse.class);
-//        logger.info("validationDtoResponse {}",result);
-
 
         return null;
 	}
@@ -125,4 +118,49 @@ public class RatingsService implements IRatingService{
 
         return result;
 	}
+
+    @Override
+    public GeneralDto updateRatings(Ratings ratings) throws JsonProcessingException {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        JsonObject properties = new JsonObject();
+        properties.addProperty("idAlumno", ratings.getIdAlumno());
+        properties.addProperty("idMateria", ratings.getIdMateria());
+        properties.addProperty("calificacion", ratings.getCalificacion());
+        HttpEntity<String> requestEntity = new HttpEntity<>(properties.toString(), headers);
+        ConnectionService connectionService = new ConnectionService();
+
+
+        ResponseEntity<String>  dataResponse = connectionService.postRest("http://localhost:8083/ratings" , requestEntity);
+        logger.info("################### termino proceso Validation{}", dataResponse);
+        String data = dataResponse.getBody();
+        Gson gson = new Gson();
+        GeneralDto result = gson.fromJson(data,GeneralDto.class);
+
+        logger.info("################ validationDtoResponse {}",result);
+
+        return result;
+    }
+
+    @Override
+    public GeneralDto deleteRatings(String idRatings) throws JsonProcessingException {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        JsonObject properties = new JsonObject();
+        HttpEntity<String> requestEntity = new HttpEntity<>(properties.toString(), headers);
+        ConnectionService connectionService = new ConnectionService();
+
+
+        ResponseEntity<String>  dataResponse = connectionService.deleteRest("http://localhost:8083/ratings/"+idRa , requestEntity);
+        logger.info("################### termino proceso Validation{}", dataResponse);
+        String data = dataResponse.getBody();
+        Gson gson = new Gson();
+        GeneralDto result = gson.fromJson(data,GeneralDto.class);
+
+        logger.info("################ validationDtoResponse {}",result);
+
+        return result;
+    }
 }

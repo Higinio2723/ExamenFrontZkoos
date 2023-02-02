@@ -19,13 +19,19 @@ public interface IRatingService {
 	 * Retrieve all ratings
 	 * @return all cars
 	 */
-	public List<RatingFormatDto> findAll();
+	List<RatingFormatDto> findAll();
 	
 	/**
 	 * search cars according to keyword in id Alumno
 	 * @param keyword for search
 	 * @return list of car that match the keyword
 	 */
-	public RatingGeneralDto search(String keyword);
+	RatingGeneralDto search(String keyword);
+
+
+	GeneralDto updateRatings(Ratings ratings) throws JsonProcessingException;
+
+
+	GeneralDto deleteRatings(Ratings ratings) throws JsonProcessingException;
     
 }

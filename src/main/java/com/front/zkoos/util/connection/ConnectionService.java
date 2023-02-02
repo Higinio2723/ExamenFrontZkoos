@@ -38,6 +38,47 @@ public class ConnectionService implements IConnectionService{
         return response;
     }
 
+
+    @Override
+    public ResponseEntity<String> putRest(String uri, HttpEntity<String> requestEntity){
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> response = null;
+        try{
+
+            restTemplate.getMessageConverters()
+                    .add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
+
+            response = restTemplate.exchange(uri,
+                    HttpMethod.PUT, requestEntity,
+                    String.class);
+
+        }catch(Exception ex){
+            //Exception
+            logger.error(ex.getMessage(),ex);
+        }
+        return response;
+    }
+
+    @Override
+    public ResponseEntity<String> deleteRest(String uri, HttpEntity<String> requestEntity){
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> response = null;
+        try{
+
+            restTemplate.getMessageConverters()
+                    .add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
+
+            response = restTemplate.exchange(uri,
+                    HttpMethod.DELETE, requestEntity,
+                    String.class);
+
+        }catch(Exception ex){
+            //Exception
+            logger.error(ex.getMessage(),ex);
+        }
+        return response;
+    }
+
     @Override
     public JsonNode postBodyRest(String uri, HttpEntity<String> requestEntity){
         JsonNode map = null;

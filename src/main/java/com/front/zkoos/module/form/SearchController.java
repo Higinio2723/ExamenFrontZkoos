@@ -65,7 +65,7 @@ public class SearchController extends SelectorComposer<Component> {
 //						.materia("Programacion")
 //						.fecha_registro("")
 //				.build());
-//		
+//
 		ratingListbox.setModel(new ListModelList<RatingFormatDto>(result));
 	}
 	

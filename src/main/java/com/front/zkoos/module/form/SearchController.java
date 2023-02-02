@@ -1,6 +1,7 @@
 package com.front.zkoos.module.form;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -49,7 +50,18 @@ public class SearchController extends SelectorComposer<Component> {
 	public void search(){
 		String keyword = keywordBox.getValue();
 		
-		List<RatingFormatDto> result = ratingsService.search(keyword);
+//		List<RatingFormatDto> result = ratingsService.search(keyword);
+
+		List<RatingFormatDto> result = new ArrayList<RatingFormatDto>();
+
+		result.add(RatingFormatDto.builder()
+						.id_t_usuario(12)
+				        .calificacion(21.0)
+						.nombre("Higinio")
+						.apellido("Gonzalez")
+						.materia("Programacion")
+						.fecha_registro("")
+				.build());
 		
 		ratingListbox.setModel(new ListModelList<RatingFormatDto>(result));
 	}

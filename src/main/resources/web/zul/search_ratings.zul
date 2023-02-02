@@ -6,7 +6,7 @@
 		<button id="searchButton" label="Search" iconSclass="z-icon-search" />
 		<button id="orderBtn" label="create" />
 	</hbox>
-	<listbox id="carListbox" emptyMessage="No se encontro información" height="260px" style="margin-top:10px">
+	<listbox id="ratingListbox" emptyMessage="No se encontro información" height="260px" style="margin-top:10px">
 		<listhead>
 			<listheader label="Id Alumno"/>
 			<listheader label="Nombre"/>
@@ -17,12 +17,12 @@
 		</listhead>
 		<template name="model">
 			<listitem>
-				<listcell label="${each.model}"></listcell>
-				<listcell label="${each.make}"></listcell>
-				<listcell label="${each.model}"></listcell>
-				<listcell label="${each.model}"></listcell>
-				<listcell label="${each.model}"></listcell>
-				<listcell label="${each.price}"></listcell>
+				<listcell label="${each.id_t_usuario}"></listcell>
+				<listcell label="${each.nombre}"></listcell>
+				<listcell label="${each.apellido}"></listcell>
+				<listcell label="${each.materia}"></listcell>
+				<listcell label="${each.calificacion}"></listcell>
+				<listcell label="${each.fecha_registro}"></listcell>
 			</listitem>
 		</template>
 	</listbox>

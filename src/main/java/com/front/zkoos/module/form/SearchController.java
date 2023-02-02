@@ -89,7 +89,7 @@ public class SearchController extends SelectorComposer<Component> {
 		String keyword = keywordBox.getValue();
 
 		Ratings ratings = new Ratings();
-		
+
 
 		GeneralDto data = ratingsService.updateRatings(ratings);
 	}

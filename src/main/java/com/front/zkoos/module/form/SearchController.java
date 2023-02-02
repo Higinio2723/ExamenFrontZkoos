@@ -1,4 +1,4 @@
-package demo.getting_started.mvc;
+package com.front.zkoos.module.form;
 
 
 import java.util.List;
@@ -18,9 +18,8 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 import org.zkoss.zul.ext.Selectable;
 
-import demo.getting_started.tutorial.Car;
-import demo.getting_started.tutorial.CarService;
-import demo.getting_started.tutorial.CarServiceImpl;
+import com.front.zkoos.module.form.dto.RatingFormatDto;
+import com.front.zkoos.module.ratings.RatingsService;
 
 public class SearchController extends SelectorComposer<Component> {
 
@@ -29,7 +28,7 @@ public class SearchController extends SelectorComposer<Component> {
 	@Wire
 	private Textbox keywordBox;
 	@Wire
-	private Listbox carListbox;
+	private Listbox ratingListbox;
 	@Wire
 	private Label modelLabel;
 	@Wire
@@ -43,28 +42,30 @@ public class SearchController extends SelectorComposer<Component> {
 	@Wire
 	private Component detailBox;
 	
+	private RatingsService ratingsService = new RatingsService();
 	
-	private CarService carService = new CarServiceImpl();
 	
 	@Listen("onClick = #searchButton")
 	public void search(){
 		String keyword = keywordBox.getValue();
-		List<Car> result = carService.search(keyword);
-		carListbox.setModel(new ListModelList<Car>(result));
+		
+		List<RatingFormatDto> result = ratingsService.search(keyword);
+		
+		ratingListbox.setModel(new ListModelList<RatingFormatDto>(result));
 	}
 	
 	@Listen("onSelect = #carListbox")
 	public void showDetail(){
 		detailBox.setVisible(true);
 		
-		Set<Car> selection = ((Selectable<Car>)carListbox.getModel()).getSelection();
+		Set<RatingFormatDto> selection = ((Selectable<RatingFormatDto>)ratingListbox.getModel()).getSelection();
 		if (selection!=null && !selection.isEmpty()){
-			Car selected = selection.iterator().next();
-			previewImage.setSrc(selected.getPreview());
-			modelLabel.setValue(selected.getModel());
-			makeLabel.setValue(selected.getMake());
-			priceLabel.setValue(selected.getPrice().toString());
-			descriptionLabel.setValue(selected.getDescription());
+			RatingFormatDto selected = selection.iterator().next();
+//			previewImage.setSrc(selected.getPreview());
+//			modelLabel.setValue(selected.getModel());
+//			makeLabel.setValue(selected.getMake());
+//			priceLabel.setValue(selected.getPrice().toString());
+//			descriptionLabel.setValue(selected.getDescription());
 		}
 	}
 	

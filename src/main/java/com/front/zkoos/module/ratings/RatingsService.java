@@ -1,11 +1,15 @@
-package com.front.zkoos.module.form;
+package com.front.zkoos.module.ratings;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.front.zkoos.module.form.dto.GeneralDto;
+import com.front.zkoos.module.form.dto.RatingFormatDto;
 import com.front.zkoos.util.connection.ConnectionService;
-import com.front.zkoos.util.connection.MyProperties;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+
+import java.util.LinkedList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
@@ -19,9 +23,8 @@ public class RatingsService implements IRatingService{
 
     private final Logger logger = LoggerFactory.getLogger(RatingsService.class);
 
-//    @WireVariable
-//    private MyProperties myProperties;
-
+  //data model
+  	private List<RatingFormatDto> ratingList= new LinkedList<RatingFormatDto>();
 
     @Override
     public GeneralDto saveRatings(Ratings ratings) throws JsonProcessingException {
@@ -58,4 +61,26 @@ public class RatingsService implements IRatingService{
         headers.add("Content-Type", mediaType);
         return headers;
     }
+
+	@Override
+	public List<RatingFormatDto> findAll() {
+		// ratingList
+		return null;
+	}
+
+	@Override
+	public List<RatingFormatDto> search(String keyword) {
+//		List<Car> result = new LinkedList<Car>();
+//		if (keyword==null || "".equals(keyword)){
+//			result = carList;
+//		}else{
+//			for (Car c: carList){
+//				if (c.getModel().toLowerCase().contains(keyword.toLowerCase())
+//					||c.getMake().toLowerCase().contains(keyword.toLowerCase())){
+//					result.add(c);
+//				}
+//			}
+//		}
+		return null;
+	}
 }

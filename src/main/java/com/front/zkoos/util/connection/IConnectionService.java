@@ -10,7 +10,7 @@ public interface IConnectionService {
 
     ResponseEntity<String> postRest(String uri, HttpEntity<String> requestEntity);
 
-    ResponseEntity<String> putRest(String uri, HttpEntity<String> requestEntity);
+    GeneralDto putRest(String uri, HttpEntity<String> requestEntity);
 
     GeneralDto deleteRest(String uri, HttpEntity<String> requestEntity);
 

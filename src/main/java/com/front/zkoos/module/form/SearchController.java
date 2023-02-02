@@ -87,8 +87,11 @@ public class SearchController extends SelectorComposer<Component> {
 	@Listen("onClick = #updateBtn")
 	public void updateRatings(Event e) throws JsonProcessingException {
 		String keyword = keywordBox.getValue();
+        int dataUpdate = Integer.valueOf(keyword);
 
 		Ratings ratings = new Ratings();
+		ratings.setIdCalificacion(dataUpdate);
+		ratings.setCalificacion(10);
 
 		GeneralDto data = ratingsService.updateRatings(ratings);
 	}

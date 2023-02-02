@@ -126,22 +126,16 @@ public class RatingsService implements IRatingService{
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         JsonObject properties = new JsonObject();
-        properties.addProperty("idAlumno", ratings.getIdAlumno());
-        properties.addProperty("idMateria", ratings.getIdMateria());
+        properties.addProperty("id", ratings.getIdCalificacion());
         properties.addProperty("calificacion", ratings.getCalificacion());
         HttpEntity<String> requestEntity = new HttpEntity<>(properties.toString(), headers);
         ConnectionService connectionService = new ConnectionService();
 
 
-        ResponseEntity<String>  dataResponse = connectionService.postRest("http://localhost:8083/ratings/"+ratings.getIdCalificacion() , requestEntity);
-        logger.info("################### termino proceso Validation{}", dataResponse);
-        String data = dataResponse.getBody();
-        Gson gson = new Gson();
-        GeneralDto result = gson.fromJson(data,GeneralDto.class);
+        GeneralDto dataResponse = connectionService.putRest("http://localhost:8083/ratings" , requestEntity);
+        logger.info("################### termino proceso Validation {}", dataResponse);
 
-        logger.info("################ validationDtoResponse {}",result);
-
-        return result;
+        return dataResponse;
     }
 
     @Override

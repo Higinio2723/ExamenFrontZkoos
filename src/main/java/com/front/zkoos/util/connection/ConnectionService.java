@@ -47,9 +47,11 @@ public class ConnectionService implements IConnectionService{
 
 
     @Override
-    public ResponseEntity<String> putRest(String uri, HttpEntity<String> requestEntity){
+    public GeneralDto putRest(String uri, HttpEntity<String> requestEntity){
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = null;
+        GeneralDto result = null;
+        RatingsErrorDto ratingsErrorDto = null;
         try{
 
             restTemplate.getMessageConverters()
@@ -59,11 +61,34 @@ public class ConnectionService implements IConnectionService{
                     HttpMethod.PUT, requestEntity,
                     String.class);
 
-        }catch(Exception ex){
-            //Exception
-            logger.error(ex.getMessage(),ex);
+            String data = (String)response.getBody();
+            Gson gson = new Gson();
+            result = gson.fromJson(data,GeneralDto.class);
+
+            logger.info("################ validationDtoResponse {}",result);
+
+        }catch(HttpStatusCodeException e){
+            try {
+                String errorpayload = e.getResponseBodyAsString();
+                logger.info("{}",errorpayload);
+
+                ObjectMapper mapper = new ObjectMapper();
+                JsonNode actualObj = mapper.readTree(errorpayload);
+
+                ratingsErrorDto = this.getMessageValid(actualObj);
+
+                result = GeneralDto.builder()
+                        .success(ratingsErrorDto.getStatus())
+                        .msg(ratingsErrorDto.getMessage())
+                        .build();
+            }catch (Exception jsonEx){
+                logger.error(jsonEx.getMessage(),jsonEx);
+            }
+            //do whatever you want
+        } catch(RestClientException e){
+            //no response payload, tell the user sth else
         }
-        return response;
+        return result;
     }
 
     @Override

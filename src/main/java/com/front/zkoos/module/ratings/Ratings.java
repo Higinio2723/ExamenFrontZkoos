@@ -3,7 +3,7 @@ package com.front.zkoos.module.ratings;
 import java.util.Date;
 
 public class Ratings {
-	private int idAlumno, idMateria ;
+	private int idCalificacion,idAlumno, idMateria ;
 	private double calificacion;
 	public int getIdAlumno() {
 		return idAlumno;
@@ -24,5 +24,11 @@ public class Ratings {
 		this.calificacion = calificacion;
 	}
 
+	public int getIdCalificacion() {
+		return idCalificacion;
+	}
 
+	public void setIdCalificacion(int idCalificacion) {
+		this.idCalificacion = idCalificacion;
+	}
 }

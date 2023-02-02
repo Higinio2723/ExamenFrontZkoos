@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.front.zkoos.module.form.dto.GeneralDto;
 import com.front.zkoos.module.form.dto.RatingGeneralDto;
+import com.front.zkoos.module.ratings.Ratings;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
@@ -52,20 +55,8 @@ public class SearchController extends SelectorComposer<Component> {
 		String keyword = keywordBox.getValue();
 
 		RatingGeneralDto data = ratingsService.search(keyword);
-
 		List<RatingFormatDto> result = data.getListData();
 
-//        result = new ArrayList<RatingFormatDto>();
-//
-//		result.add(RatingFormatDto.builder()
-//						.id_t_usuario(12)
-//				        .calificacion(21.0)
-//						.nombre("Higinio")
-//						.apellido("Gonzalez")
-//						.materia("Programacion")
-//						.fecha_registro("")
-//				.build());
-//
 		ratingListbox.setModel(new ListModelList<RatingFormatDto>(result));
 	}
 	
@@ -83,7 +74,26 @@ public class SearchController extends SelectorComposer<Component> {
 //			descriptionLabel.setValue(selected.getDescription());
 		}
 	}
-	
+
+	@Listen("onClick = #deleteBtn")
+	public void deleteRatings(Event e) throws JsonProcessingException {
+		String keyword = keywordBox.getValue();
+
+		GeneralDto data = ratingsService.deleteRatings(keyword);
+
+	}
+
+
+	@Listen("onClick = #updateBtn")
+	public void updateRatings(Event e) throws JsonProcessingException {
+		String keyword = keywordBox.getValue();
+
+		Ratings ratings = new Ratings();
+		
+
+		GeneralDto data = ratingsService.updateRatings(ratings);
+	}
+
 	
 	@Listen("onClick = #orderBtn")
 	public void showModal(Event e) {

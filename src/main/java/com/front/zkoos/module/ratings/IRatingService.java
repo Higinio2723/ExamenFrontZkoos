@@ -32,6 +32,6 @@ public interface IRatingService {
 	GeneralDto updateRatings(Ratings ratings) throws JsonProcessingException;
 
 
-	GeneralDto deleteRatings(Ratings ratings) throws JsonProcessingException;
+	GeneralDto deleteRatings(String idRatings) throws JsonProcessingException;
     
 }

@@ -132,7 +132,7 @@ public class RatingsService implements IRatingService{
         ConnectionService connectionService = new ConnectionService();
 
 
-        ResponseEntity<String>  dataResponse = connectionService.postRest("http://localhost:8083/ratings" , requestEntity);
+        ResponseEntity<String>  dataResponse = connectionService.postRest("http://localhost:8083/ratings/"+ratings.getIdCalificacion() , requestEntity);
         logger.info("################### termino proceso Validation{}", dataResponse);
         String data = dataResponse.getBody();
         Gson gson = new Gson();
@@ -153,7 +153,7 @@ public class RatingsService implements IRatingService{
         ConnectionService connectionService = new ConnectionService();
 
 
-        ResponseEntity<String>  dataResponse = connectionService.deleteRest("http://localhost:8083/ratings/"+idRa , requestEntity);
+        ResponseEntity<String>  dataResponse = connectionService.deleteRest("http://localhost:8083/ratings/"+idRatings , requestEntity);
         logger.info("################### termino proceso Validation{}", dataResponse);
         String data = dataResponse.getBody();
         Gson gson = new Gson();

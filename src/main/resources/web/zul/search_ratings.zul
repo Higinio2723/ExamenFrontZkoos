@@ -4,7 +4,9 @@
 		Id Alumno:
 		<textbox id="keywordBox" />
 		<button id="searchButton" label="Search" iconSclass="z-icon-search" />
-		<button id="orderBtn" label="create" />
+		<button id="orderBtn" label="Create" />
+		<button id="updateBtn" label="Editar" />
+		<button id="deleteBtn" label="Eliminar" />
 	</hbox>
 	<listbox id="ratingListbox" emptyMessage="No se encontro información" height="260px" style="margin-top:10px">
 		<listhead>
@@ -23,6 +25,7 @@
 				<listcell label="${each.materia}"></listcell>
 				<listcell label="${each.calificacion}"></listcell>
 				<listcell label="${each.fecha_registro}"></listcell>
+
 			</listitem>
 		</template>
 	</listbox>

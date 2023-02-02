@@ -1,14 +1,21 @@
 package com.front.zkoos.util.connection;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.front.zkoos.module.form.dto.GeneralDto;
+import com.front.zkoos.module.form.dto.RatingsErrorDto;
+import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.HttpStatusCodeException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.StandardCharsets;
@@ -60,9 +67,11 @@ public class ConnectionService implements IConnectionService{
     }
 
     @Override
-    public ResponseEntity<String> deleteRest(String uri, HttpEntity<String> requestEntity){
+    public GeneralDto deleteRest(String uri, HttpEntity<String> requestEntity){
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = null;
+        GeneralDto result = null;
+        RatingsErrorDto ratingsErrorDto = null;
         try{
 
             restTemplate.getMessageConverters()
@@ -72,11 +81,34 @@ public class ConnectionService implements IConnectionService{
                     HttpMethod.DELETE, requestEntity,
                     String.class);
 
-        }catch(Exception ex){
-            //Exception
-            logger.error(ex.getMessage(),ex);
+            String data = (String)response.getBody();
+            Gson gson = new Gson();
+            result = gson.fromJson(data,GeneralDto.class);
+
+            logger.info("################ validationDtoResponse {}",result);
+
+        }catch(HttpStatusCodeException e){
+            try {
+                String errorpayload = e.getResponseBodyAsString();
+                logger.info("{}",errorpayload);
+
+                ObjectMapper mapper = new ObjectMapper();
+                JsonNode actualObj = mapper.readTree(errorpayload);
+
+                ratingsErrorDto = this.getMessageValid(actualObj);
+
+                   result = GeneralDto.builder()
+                           .success(ratingsErrorDto.getStatus())
+                           .msg(ratingsErrorDto.getMessage())
+                           .build();
+            }catch (Exception jsonEx){
+                logger.error(jsonEx.getMessage(),jsonEx);
+            }
+            //do whatever you want
+        } catch(RestClientException e){
+            //no response payload, tell the user sth else
         }
-        return response;
+        return result;
     }
 
     @Override
@@ -161,5 +193,31 @@ public class ConnectionService implements IConnectionService{
         return result;
     }
 
+    public RatingsErrorDto getMessageValid(JsonNode actualObj){
+        RatingsErrorDto datosResult = null;
+
+
+        logger.info("actualObj {}",actualObj.get("message").asText());
+        if(actualObj.get("status").toString().equals("400")){
+            datosResult = RatingsErrorDto.builder()
+                    .status("400")
+                    .message(actualObj.get("message").asText())
+                    .build();
+        }else if(actualObj.get("status").toString().equals("404")){
+            datosResult = RatingsErrorDto.builder()
+                    .status("500")
+                    .message(actualObj.get("message").asText())
+                    .build();
+
+        }else if(actualObj.get("status").toString().equals("500")){
+            datosResult = RatingsErrorDto.builder()
+                    .status("500")
+                    .message(actualObj.get("message").asText())
+                    .build();
+
+        }
+        return datosResult;
+
+    }
 
 }

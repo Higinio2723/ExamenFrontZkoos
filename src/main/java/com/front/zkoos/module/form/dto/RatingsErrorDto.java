@@ -9,10 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class GeneralDto {
+public class RatingsErrorDto {
 
-    private String success;
-
-    private String msg;
+    private String status;
+    private String message;
 
 }

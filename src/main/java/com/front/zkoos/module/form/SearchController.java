@@ -90,7 +90,6 @@ public class SearchController extends SelectorComposer<Component> {
 
 		Ratings ratings = new Ratings();
 
-
 		GeneralDto data = ratingsService.updateRatings(ratings);
 	}
 

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.front.zkoos.module.form.dto.GeneralDto;
 import com.front.zkoos.module.form.dto.RatingFormatDto;
 import com.front.zkoos.module.form.dto.RatingGeneralDto;
@@ -153,14 +154,9 @@ public class RatingsService implements IRatingService{
         ConnectionService connectionService = new ConnectionService();
 
 
-        ResponseEntity<String>  dataResponse = connectionService.deleteRest("http://localhost:8083/ratings/"+idRatings , requestEntity);
-        logger.info("################### termino proceso Validation{}", dataResponse);
-        String data = dataResponse.getBody();
-        Gson gson = new Gson();
-        GeneralDto result = gson.fromJson(data,GeneralDto.class);
+        GeneralDto dataResponse = connectionService.deleteRest("http://localhost:8083/ratings/"+idRatings , requestEntity);
+        logger.info("################### termino proceso Validation {}", dataResponse);
 
-        logger.info("################ validationDtoResponse {}",result);
-
-        return result;
+        return dataResponse;
     }
 }

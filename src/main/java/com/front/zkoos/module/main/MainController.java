@@ -14,7 +14,8 @@ public class MainController {
 
     @GetMapping("/listData")
     public String listData() {
-        return "ratingslist";
+        return "search_ratings";
+        
     }
 
 }

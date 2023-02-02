@@ -1,14 +1,12 @@
-<zk>
-	<style src="/widgets/input/form_sample/style.css" />
-	<div apply=""
+
+<window id="modalDialog" title="Guardar calificación" border="normal" width="660px"
+	apply=""
+	position="center,center" closable="true" 
+	action="show: slideDown;hide: slideUp"
 		viewModel="@id('vm') @init('com.front.zkoos.module.form.FormViewModel')"
-		validationMessages="@id('vmsgs')"
+		validationMessages="@id('vmsgs')" 
 		form="@id('fx') @load(vm.ratings) @save(vm.ratings, before='submit') ">
 		<grid>
-			<columns>
-				<column label="Type" width="120px" />
-				<column label="Content" />
-			</columns>
 			<rows>
 				<row>
 					<label value="Id Alumno" width="150px" />
@@ -45,6 +43,5 @@
 				</row>
 			</rows>
 		</grid>
-	</div>
 
-</zk>
+</window>

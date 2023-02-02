@@ -12,15 +12,15 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.InputEvent;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
+import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Window;
 
 import java.util.HashMap;
 import java.util.Map;
 
-//@VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
+
 public class FormViewModel extends UserForm {
-//	private NavigationModel<MyObject> navModel = new NavigationModel<MyObject>();
 
 	private final Logger logger = LoggerFactory.getLogger(FormViewModel.class);
 
@@ -45,10 +45,7 @@ public class FormViewModel extends UserForm {
 	public String ratingsList() throws JsonProcessingException {
 		logger.info("################## getRatings() {}",this.getRatings().toString());
 
-		Map args = new HashMap();
-		args.put("pCustomer", "this.selectedCustomer");
-		args.put("recordMode", "this.recordMode");
-		BindUtils.postGlobalCommand(null, null, "updateCustomerList", args);
+		Executions.createComponents("ratingslist.zul", null, null);
 		return "";
 	}
 

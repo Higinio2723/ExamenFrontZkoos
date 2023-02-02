@@ -6,6 +6,7 @@ import com.front.zkoos.module.form.dto.RatingFormatDto;
 
 import java.util.List;
 
+import com.front.zkoos.module.form.dto.RatingGeneralDto;
 import org.springframework.util.MultiValueMap;
 
 public interface IRatingService {
@@ -15,16 +16,16 @@ public interface IRatingService {
     MultiValueMap<String, String> connectionHeader(String mediaType);
     
     /**
-	 * Retrieve all cars in the catalog.
+	 * Retrieve all ratings
 	 * @return all cars
 	 */
 	public List<RatingFormatDto> findAll();
 	
 	/**
-	 * search cars according to keyword in name and company.
+	 * search cars according to keyword in id Alumno
 	 * @param keyword for search
 	 * @return list of car that match the keyword
 	 */
-	public List<RatingFormatDto> search(String keyword);
+	public RatingGeneralDto search(String keyword);
     
 }

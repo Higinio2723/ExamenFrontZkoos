@@ -1,8 +1,12 @@
 package com.front.zkoos.module.ratings;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.front.zkoos.module.form.dto.GeneralDto;
 import com.front.zkoos.module.form.dto.RatingFormatDto;
+import com.front.zkoos.module.form.dto.RatingGeneralDto;
 import com.front.zkoos.util.connection.ConnectionService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -39,7 +43,6 @@ public class RatingsService implements IRatingService{
         HttpEntity<String> requestEntity = new HttpEntity<>(properties.toString(), headers);
         ConnectionService connectionService = new ConnectionService();
 
-//        logger.info("################## myProperties {}",myProperties.getHttpSchoolUrl());
 
         ResponseEntity<String>  dataResponse = connectionService.postRest("http://localhost:8083/ratings" , requestEntity);
         logger.info("################### termino proceso Validation{}", dataResponse);
@@ -64,12 +67,33 @@ public class RatingsService implements IRatingService{
 
 	@Override
 	public List<RatingFormatDto> findAll() {
-		// ratingList
-		return null;
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        LinkedMultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        logger.info("iniciando proceso {}",headers );
+
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+        ConnectionService connectionService = new ConnectionService();
+
+        JsonNode dataResponse  = connectionService.getRest("http://localhost:8083/ratings/students/",requestEntity);
+        logger.info("termino proceso {}",dataResponse );
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        logger.info("################### termino proceso Validation{}", dataResponse);
+//        String data = dataResponse.getBody();
+//        Gson gson = new Gson();
+//        GeneralDto result = gson.fromJson(data,GeneralDto.class);
+//
+//        DataResponse<PdfViewDto> result = objectMapper.readValue(jsonNode.toString(), DataResponse.class);
+//        logger.info("validationDtoResponse {}",result);
+
+
+        return null;
 	}
 
 	@Override
-	public List<RatingFormatDto> search(String keyword) {
+	public RatingGeneralDto search(String keyword) {
 //		List<Car> result = new LinkedList<Car>();
 //		if (keyword==null || "".equals(keyword)){
 //			result = carList;
@@ -81,6 +105,24 @@ public class RatingsService implements IRatingService{
 //				}
 //			}
 //		}
-		return null;
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        LinkedMultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        logger.info("########### iniciando proceso {}",headers );
+
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+        ConnectionService connectionService = new ConnectionService();
+
+        JsonNode dataResponse  = connectionService.getRest("http://localhost:8083/ratings/students/"+keyword,requestEntity);
+        logger.info("###########  proceso {}",dataResponse );
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        RatingGeneralDto result = objectMapper.convertValue(dataResponse, RatingGeneralDto.class);
+
+        logger.info("############# termino proceso {}",result );
+
+
+        return result;
 	}
 }

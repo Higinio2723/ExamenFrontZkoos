@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.front.zkoos.module.form.dto.RatingGeneralDto;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
@@ -49,20 +50,22 @@ public class SearchController extends SelectorComposer<Component> {
 	@Listen("onClick = #searchButton")
 	public void search(){
 		String keyword = keywordBox.getValue();
-		
-//		List<RatingFormatDto> result = ratingsService.search(keyword);
 
-		List<RatingFormatDto> result = new ArrayList<RatingFormatDto>();
+		RatingGeneralDto data = ratingsService.search(keyword);
 
-		result.add(RatingFormatDto.builder()
-						.id_t_usuario(12)
-				        .calificacion(21.0)
-						.nombre("Higinio")
-						.apellido("Gonzalez")
-						.materia("Programacion")
-						.fecha_registro("")
-				.build());
-		
+		List<RatingFormatDto> result = data.getListData();
+
+//        result = new ArrayList<RatingFormatDto>();
+//
+//		result.add(RatingFormatDto.builder()
+//						.id_t_usuario(12)
+//				        .calificacion(21.0)
+//						.nombre("Higinio")
+//						.apellido("Gonzalez")
+//						.materia("Programacion")
+//						.fecha_registro("")
+//				.build());
+//		
 		ratingListbox.setModel(new ListModelList<RatingFormatDto>(result));
 	}
 	

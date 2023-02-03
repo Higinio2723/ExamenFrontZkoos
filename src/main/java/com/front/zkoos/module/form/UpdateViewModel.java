@@ -12,9 +12,14 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.SelectorComposer;
+import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Window;
 
 public class UpdateViewModel extends SelectorComposer<Component> {
-	
+
+	@Wire
+	Window modalDialog;
+
 	private final Logger logger = LoggerFactory.getLogger(UpdateViewModel.class);
 
 	private Ratings ratings = new Ratings();
@@ -42,9 +47,12 @@ public class UpdateViewModel extends SelectorComposer<Component> {
 	public void updateSubmit() throws JsonProcessingException {
 		int data = this.getRatings().getIdAlumno();
 		System.out.println("######## data ="+data);
+		System.out.println("######## calificacion ="+this.getRatings().getCalificacion());
+		System.out.println("######## data ="+data);
 
 		RatingsService ratingsService = new RatingsService();
 				ratingsService.updateRatings(this.getRatings());
+
 	}
 
 	

@@ -1,6 +1,7 @@
 package com.front.zkoos.module.form;
 
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -8,6 +9,7 @@ import java.util.Set;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.front.zkoos.module.ratings.dto.GeneralDto;
 import com.front.zkoos.module.ratings.dto.RatingGeneralDto;
+import com.front.zkoos.module.report.ReportRatingsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.bind.annotation.BindingParam;
@@ -54,8 +56,11 @@ public class SearchController extends SelectorComposer<Component> {
 	private RatingFormatDto selected;
 
 	private RatingsService ratingsService = new RatingsService();
-	
-	
+
+	private ReportRatingsService reportService = new ReportRatingsService();
+
+
+
 	@Listen("onClick = #searchButton")
 	public void search(){
 		String keyword = keywordBox.getValue();
@@ -81,6 +86,15 @@ public class SearchController extends SelectorComposer<Component> {
 
 	}
 
+
+	@Listen("onClick = #reportBtn")
+	public void reportRatings(Event e) throws IOException {
+
+		String keyword = keywordBox.getValue();
+
+		reportService.downloadReportFiles(keyword);
+
+	}
 
 	@Listen("onClick = #updateBtn")
 	public void updateRatings(Event e) throws JsonProcessingException {

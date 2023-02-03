@@ -205,7 +205,7 @@ public class ConnectionService implements IConnectionService{
             RestTemplate restTemplate = new RestTemplate();
 
             result = restTemplate.exchange(url,
-                    HttpMethod.POST, requestEntity,
+                    HttpMethod.GET, requestEntity,
                     byte[].class);
 
 

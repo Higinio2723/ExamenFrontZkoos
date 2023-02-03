@@ -7,11 +7,6 @@ import com.front.zkoos.module.ratings.dto.SubjectDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.bind.annotation.*;
-import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zul.Div;
-import org.zkoss.zul.Window;
 
 import java.util.ArrayList;
 import java.util.List;

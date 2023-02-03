@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.front.zkoos.module.form.data.Ratings;
 import com.front.zkoos.module.ratings.dto.*;
+import com.front.zkoos.util.MyProperties;
 import com.front.zkoos.util.connection.ConnectionService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -16,6 +17,7 @@ import java.util.List;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -28,6 +30,9 @@ public class RatingsService implements IRatingService{
 
   //data model
   	private List<RatingFormatDto> ratingList= new LinkedList<RatingFormatDto>();
+
+    @Autowired
+    MyProperties values;
 
     @Override
     public GeneralDto saveRatings(Ratings ratings,String idMateria) throws JsonProcessingException {

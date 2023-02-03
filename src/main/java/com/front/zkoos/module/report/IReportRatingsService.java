@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public interface IReportRatingsService {
 
-    public String downloadReportFiles(String idValidation) throws IOException;
+    byte[] downloadReportFiles(String idValidation) throws IOException;
 
 
 }

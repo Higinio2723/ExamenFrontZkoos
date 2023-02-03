@@ -2,6 +2,8 @@ package com.front.zkoos.module.form;
 
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -30,6 +32,9 @@ import com.front.zkoos.module.ratings.RatingsService;
 public class SearchController extends SelectorComposer<Component> {
 
 	private final Logger logger = LoggerFactory.getLogger(SearchController.class);
+
+	private final static String DIRECTORIO_UPLOAD = "/report";
+
 	private static final long serialVersionUID = 1L;
 
 	private ListModel<RatingFormatDto> ratingsModel;
@@ -92,7 +97,12 @@ public class SearchController extends SelectorComposer<Component> {
 
 		String keyword = keywordBox.getValue();
 
-		reportService.downloadReportFiles(keyword);
+		byte[] data =reportService.downloadReportFiles(keyword);
+		logger.info("################## keyword {} ",keyword);
+		if(keyword == "" || keyword == null || keyword == " ") {
+			keyword = "all";
+		}
+		Filedownload.save(data,"application/pdf","report_"+keyword+".pdf");
 
 	}
 
@@ -135,5 +145,8 @@ public class SearchController extends SelectorComposer<Component> {
 		}
 	}
 
+	public Path getPath(String nombre) {
+		return Paths.get(DIRECTORIO_UPLOAD).resolve(nombre).toAbsolutePath();
+	}
 
 }

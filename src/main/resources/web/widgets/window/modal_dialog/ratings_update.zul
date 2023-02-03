@@ -22,13 +22,6 @@
 					</hlayout>
 				</row>
 				<row>
-					<label value="Apellido materno" width="150px" />
-					<hlayout>
-						<textbox value="@bind(fx.apellidoMaterno)"
-								 width="150px" tabindex="1" />
-					</hlayout>
-				</row>
-				<row>
 					<label value="Materia" width="150px" />
 					<hlayout>
 						<textbox value="@bind(fx.nombreMateria)"

@@ -29,12 +29,15 @@
 								 width="150px" tabindex="1" />
 					</hlayout>
 				</row>
+
 				<row>
-					<label value="Id Materia" width="150px" />
-					<hlayout>
-						<textbox value="@bind(fx.idMateria)"
-							width="150px" tabindex="1" />
-					</hlayout>
+					<label value="Materia" width="150px" />
+					<combobox id="cmbMateria" width="150px"
+							  model="@load(vm.materias)" selectedItem="@bind(vm.materia)">
+						<template name="model">
+							<comboitem label="@load(each)"/>
+						</template>
+					</combobox>
 				</row>
 
 				<row>

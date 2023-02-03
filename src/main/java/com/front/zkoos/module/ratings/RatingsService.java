@@ -1,6 +1,7 @@
 package com.front.zkoos.module.ratings;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.front.zkoos.module.form.data.Ratings;
@@ -29,7 +30,7 @@ public class RatingsService implements IRatingService{
   	private List<RatingFormatDto> ratingList= new LinkedList<RatingFormatDto>();
 
     @Override
-    public GeneralDto saveRatings(Ratings ratings) throws JsonProcessingException {
+    public GeneralDto saveRatings(Ratings ratings,String idMateria) throws JsonProcessingException {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -37,7 +38,7 @@ public class RatingsService implements IRatingService{
         JSONObject myObject = new JSONObject();
 
         // Cadenas de texto básicas
-        myObject.put("idMateria", ratings.getIdMateria());
+        myObject.put("idMateria", idMateria);
         myObject.put("calificacion", ratings.getCalificacion());
 
         // Objeto dentro de objeto
@@ -164,25 +165,24 @@ public class RatingsService implements IRatingService{
     }
 
     @Override
-    public SubjectDto getSubjectById(int idSubject) throws JsonProcessingException {
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//        LinkedMultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-//        logger.info("########### iniciando proceso {}",headers );
-//
-//        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
-//        ConnectionService connectionService = new ConnectionService();
-//
-//        JsonNode dataResponse  = connectionService.getRest("http://localhost:8083/subjects/="+idSubject,requestEntity);
-//        logger.info("###########  proceso {}",dataResponse );
-//
-//        ObjectMapper objectMapper = new ObjectMapper();
-//
-//        RatingGeneralDto result = objectMapper.convertValue(dataResponse, RatingGeneralDto.class);
-//
-//        logger.info("############# termino proceso {}",result );
+    public List<SubjectDto> getAllSubject() throws JsonProcessingException {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        LinkedMultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        logger.info("########### iniciando proceso {}",headers );
 
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+        ConnectionService connectionService = new ConnectionService();
 
-        return null;
+        JsonNode dataResponse  = connectionService.getRest("http://localhost:8083/subjects",requestEntity);
+        logger.info("###########  proceso {}",dataResponse );
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        List<SubjectDto> result = objectMapper.convertValue(dataResponse.get("subjects"), new TypeReference<List<SubjectDto>>() {});
+
+        logger.info("############# termino proceso {}",result );
+
+        return result;
     }
 }

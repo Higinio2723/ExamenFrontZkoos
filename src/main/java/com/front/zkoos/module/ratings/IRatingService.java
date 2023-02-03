@@ -13,7 +13,7 @@ import org.springframework.util.MultiValueMap;
 
 public interface IRatingService {
 
-    GeneralDto saveRatings(Ratings ratings) throws JsonProcessingException;
+    GeneralDto saveRatings(Ratings ratings, String idMateria) throws JsonProcessingException;
    
     MultiValueMap<String, String> connectionHeader(String mediaType);
     
@@ -36,6 +36,6 @@ public interface IRatingService {
 
 	GeneralDto deleteRatings(String idRatings) throws JsonProcessingException;
 
-	SubjectDto getSubjectById(int idSubject) throws JsonProcessingException;
+	List<SubjectDto> getAllSubject() throws JsonProcessingException;
 
 }

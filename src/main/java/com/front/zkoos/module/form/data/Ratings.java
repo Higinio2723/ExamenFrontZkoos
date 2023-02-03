@@ -1,34 +1,18 @@
 package com.front.zkoos.module.form.data;
 
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Ratings {
 	private int idCalificacion,idAlumno, idMateria ;
+
+	private String nombre, apellidoPaterno, apellidoMaterno, nombreMateria;
 	private double calificacion;
-	public int getIdAlumno() {
-		return idAlumno;
-	}
-	public void setIdAlumno(int idAlumno) {
-		this.idAlumno = idAlumno;
-	}
-	public int getIdMateria() {
-		return idMateria;
-	}
-	public void setIdMateria(int idMateria) {
-		this.idMateria = idMateria;
-	}
-	public double getCalificacion() {
-		return calificacion;
-	}
-	public void setCalificacion(double calificacion) {
-		this.calificacion = calificacion;
-	}
 
-	public int getIdCalificacion() {
-		return idCalificacion;
-	}
-
-	public void setIdCalificacion(int idCalificacion) {
-		this.idCalificacion = idCalificacion;
-	}
 }

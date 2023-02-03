@@ -50,7 +50,9 @@ public class SearchController extends SelectorComposer<Component> {
 	private Component detailBox;
 
 	private Integer idCalificacion;
-	
+
+	private RatingFormatDto selected;
+
 	private RatingsService ratingsService = new RatingsService();
 	
 	
@@ -83,9 +85,10 @@ public class SearchController extends SelectorComposer<Component> {
 	@Listen("onClick = #updateBtn")
 	public void updateRatings(Event e) throws JsonProcessingException {
 		//create a window programmatically and use it as a modal dialog.
-		HashMap map = new HashMap<String, String>();
+		HashMap map = new HashMap<String, Object>();
 		logger.info("################## idCalificacion {}", idCalificacion);
 		map.put("idCalificacion", ""+idCalificacion);
+		map.put("selected", selected);
 
 		Window window = (Window)Executions.createComponents(
 				"~./widgets/window/modal_dialog/ratings_update.zul", null, map);
@@ -112,7 +115,7 @@ public class SearchController extends SelectorComposer<Component> {
 //		detailBox.setVisible(true);
 		Set<RatingFormatDto> selection = ((Selectable<RatingFormatDto>)ratingListbox.getModel()).getSelection();
 		if (selection!=null && !selection.isEmpty()){
-			RatingFormatDto selected = selection.iterator().next();
+			selected = selection.iterator().next();
 			logger.info("############ {}",selected.getId_calificacion());
 			idCalificacion = selected.getId_calificacion();
 		}

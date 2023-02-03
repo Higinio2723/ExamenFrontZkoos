@@ -3,6 +3,7 @@ package com.front.zkoos.module.form;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.front.zkoos.module.form.data.Ratings;
 import com.front.zkoos.module.ratings.RatingsService;
+import com.front.zkoos.module.ratings.dto.RatingFormatDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.bind.annotation.BindingParam;
@@ -38,9 +39,16 @@ public class UpdateViewModel extends SelectorComposer<Component> {
 	public void init(@BindingParam("arg1") String arg1) {
 		final Execution execution = Executions.getCurrent();
 		String idCalificacion = (String) execution.getArg().get("idCalificacion");
+		RatingFormatDto selected =  (RatingFormatDto) execution.getArg().get("selected");
 		logger.info("################### idCalificacion update {}", idCalificacion);
+		logger.info("################### selected update {}", selected);
+
         int id = Integer.valueOf(idCalificacion).intValue();
 		ratings.setIdCalificacion(id);
+		ratings.setNombre(selected.getNombre());
+		ratings.setApellidoPaterno(selected.getApellido());
+        ratings.setNombreMateria(selected.getMateria());
+		ratings.setCalificacion(selected.getCalificacion());
 	}
 
 	@Command

@@ -9,10 +9,24 @@
 		<grid>
 			<rows>
 				<row>
-					<label value="Id Alumno" width="150px" />
+					<label value="Nombre alumno" width="150px" />
 					<hlayout>
-						<textbox value="@bind(fx.idAlumno)"
+						<textbox value="@bind(fx.nombre)"
 							width="150px" tabindex="1" />
+					</hlayout>
+				</row>
+				<row>
+					<label value="Apellido paterno" width="150px" />
+					<hlayout>
+						<textbox value="@bind(fx.apellidoPaterno)"
+								 width="150px" tabindex="1" />
+					</hlayout>
+				</row>
+				<row>
+					<label value="Apellido materno" width="150px" />
+					<hlayout>
+						<textbox value="@bind(fx.apellidoMaterno)"
+								 width="150px" tabindex="1" />
 					</hlayout>
 				</row>
 				<row>

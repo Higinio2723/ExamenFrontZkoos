@@ -4,10 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.front.zkoos.module.form.data.Ratings;
-import com.front.zkoos.module.ratings.dto.GeneralDto;
-import com.front.zkoos.module.ratings.dto.RatingFormatDto;
-import com.front.zkoos.module.ratings.dto.RatingGeneralDto;
-import com.front.zkoos.module.ratings.dto.StudentDto;
+import com.front.zkoos.module.ratings.dto.*;
 import com.front.zkoos.util.connection.ConnectionService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -15,6 +12,7 @@ import com.google.gson.JsonObject;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
@@ -36,27 +34,27 @@ public class RatingsService implements IRatingService{
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        StudentDto studentDto = StudentDto.builder()
-                .nombre("Higinio")
-                .apellidoMaterno("Gonzalez")
-                .apellidoPaterno("Gonzalez")
-                .build();
+        JSONObject myObject = new JSONObject();
 
+        // Cadenas de texto básicas
+        myObject.put("idMateria", ratings.getIdMateria());
+        myObject.put("calificacion", ratings.getCalificacion());
 
-        String jsonStudent =  new Gson().toJson(studentDto);
+        // Objeto dentro de objeto
+        JSONObject subdata = new JSONObject();
+        subdata.put("nombre",ratings.getNombre());
+        subdata.put("apellidoPaterno",ratings.getApellidoPaterno());
+        subdata.put("apellidoMaterno",ratings.getApellidoMaterno());
+        myObject.put("alumno", subdata);
 
-        JsonObject properties = new JsonObject();
-        properties.addProperty("idAlumno", ratings.getIdAlumno());
-        properties.addProperty("idMateria", ratings.getIdMateria());
-        properties.addProperty("calificacion", ratings.getCalificacion());
-        properties.addProperty("student",jsonStudent);
-        logger.info("properties {}", properties);
+        // Generar cadena de texto JSON
+        System.out.print(myObject);
 
-        HttpEntity<String> requestEntity = new HttpEntity<>(properties.toString(), headers);
+        HttpEntity<String> requestEntity = new HttpEntity<>(myObject.toString(), headers);
         ConnectionService connectionService = new ConnectionService();
 
 
-        ResponseEntity<String>  dataResponse = connectionService.postRest("http://localhost:8083/ratings" , requestEntity);
+        ResponseEntity<String>  dataResponse = connectionService.postRest("http://localhost:8083/ratings_det" , requestEntity);
         logger.info("################### termino proceso Validation{}", dataResponse);
         String data = dataResponse.getBody();
         Gson gson = new Gson();
@@ -87,7 +85,7 @@ public class RatingsService implements IRatingService{
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
         ConnectionService connectionService = new ConnectionService();
 
-        JsonNode dataResponse  = connectionService.getRest("http://localhost:8083/ratings/students/",requestEntity);
+        JsonNode dataResponse  = connectionService.getRest("http://localhost:8083/ratings/students?idStudent=",requestEntity);
         logger.info("termino proceso {}",dataResponse );
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -118,7 +116,7 @@ public class RatingsService implements IRatingService{
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
         ConnectionService connectionService = new ConnectionService();
 
-        JsonNode dataResponse  = connectionService.getRest("http://localhost:8083/ratings/students/"+keyword,requestEntity);
+        JsonNode dataResponse  = connectionService.getRest("http://localhost:8083/ratings/students?idStudent="+keyword,requestEntity);
         logger.info("###########  proceso {}",dataResponse );
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -163,5 +161,28 @@ public class RatingsService implements IRatingService{
         logger.info("################### termino proceso Validation {}", dataResponse);
 
         return dataResponse;
+    }
+
+    @Override
+    public SubjectDto getSubjectById(int idSubject) throws JsonProcessingException {
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_JSON);
+//        LinkedMultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+//        logger.info("########### iniciando proceso {}",headers );
+//
+//        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+//        ConnectionService connectionService = new ConnectionService();
+//
+//        JsonNode dataResponse  = connectionService.getRest("http://localhost:8083/subjects/="+idSubject,requestEntity);
+//        logger.info("###########  proceso {}",dataResponse );
+//
+//        ObjectMapper objectMapper = new ObjectMapper();
+//
+//        RatingGeneralDto result = objectMapper.convertValue(dataResponse, RatingGeneralDto.class);
+//
+//        logger.info("############# termino proceso {}",result );
+
+
+        return null;
     }
 }

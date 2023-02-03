@@ -8,6 +8,7 @@ import com.front.zkoos.module.ratings.dto.RatingFormatDto;
 import java.util.List;
 
 import com.front.zkoos.module.ratings.dto.RatingGeneralDto;
+import com.front.zkoos.module.ratings.dto.SubjectDto;
 import org.springframework.util.MultiValueMap;
 
 public interface IRatingService {
@@ -34,5 +35,7 @@ public interface IRatingService {
 
 
 	GeneralDto deleteRatings(String idRatings) throws JsonProcessingException;
-    
+
+	SubjectDto getSubjectById(int idSubject) throws JsonProcessingException;
+
 }

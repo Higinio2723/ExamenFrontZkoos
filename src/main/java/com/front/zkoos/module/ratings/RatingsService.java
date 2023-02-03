@@ -7,6 +7,7 @@ import com.front.zkoos.module.form.data.Ratings;
 import com.front.zkoos.module.ratings.dto.GeneralDto;
 import com.front.zkoos.module.ratings.dto.RatingFormatDto;
 import com.front.zkoos.module.ratings.dto.RatingGeneralDto;
+import com.front.zkoos.module.ratings.dto.StudentDto;
 import com.front.zkoos.util.connection.ConnectionService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -35,10 +36,22 @@ public class RatingsService implements IRatingService{
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
+        StudentDto studentDto = StudentDto.builder()
+                .nombre("Higinio")
+                .apellidoMaterno("Gonzalez")
+                .apellidoPaterno("Gonzalez")
+                .build();
+
+
+        String jsonStudent =  new Gson().toJson(studentDto);
+
         JsonObject properties = new JsonObject();
         properties.addProperty("idAlumno", ratings.getIdAlumno());
         properties.addProperty("idMateria", ratings.getIdMateria());
         properties.addProperty("calificacion", ratings.getCalificacion());
+        properties.addProperty("student",jsonStudent);
+        logger.info("properties {}", properties);
+
         HttpEntity<String> requestEntity = new HttpEntity<>(properties.toString(), headers);
         ConnectionService connectionService = new ConnectionService();
 

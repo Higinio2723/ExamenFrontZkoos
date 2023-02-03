@@ -2,14 +2,13 @@ package com.front.zkoos.util.connection;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.front.zkoos.module.form.dto.GeneralDto;
-import com.front.zkoos.module.form.dto.RatingsErrorDto;
+import com.front.zkoos.module.ratings.dto.GeneralDto;
+import com.front.zkoos.module.ratings.dto.RatingsErrorDto;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Service;

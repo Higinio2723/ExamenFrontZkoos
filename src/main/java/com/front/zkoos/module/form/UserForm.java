@@ -1,6 +1,6 @@
 package com.front.zkoos.module.form;
 
-import com.front.zkoos.module.ratings.Ratings;
+import com.front.zkoos.module.form.data.Ratings;
 
 public class UserForm {
 

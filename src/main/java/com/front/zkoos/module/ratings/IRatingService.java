@@ -1,12 +1,13 @@
 package com.front.zkoos.module.ratings;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.front.zkoos.module.form.dto.GeneralDto;
-import com.front.zkoos.module.form.dto.RatingFormatDto;
+import com.front.zkoos.module.form.data.Ratings;
+import com.front.zkoos.module.ratings.dto.GeneralDto;
+import com.front.zkoos.module.ratings.dto.RatingFormatDto;
 
 import java.util.List;
 
-import com.front.zkoos.module.form.dto.RatingGeneralDto;
+import com.front.zkoos.module.ratings.dto.RatingGeneralDto;
 import org.springframework.util.MultiValueMap;
 
 public interface IRatingService {

@@ -1,4 +1,4 @@
-package com.front.zkoos.module.form.dto;
+package com.front.zkoos.module.ratings.dto;
 
 import lombok.*;
 

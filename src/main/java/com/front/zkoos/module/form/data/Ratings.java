@@ -1,4 +1,4 @@
-package com.front.zkoos.module.ratings;
+package com.front.zkoos.module.form.data;
 
 import java.util.Date;
 

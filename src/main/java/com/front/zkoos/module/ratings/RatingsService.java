@@ -1,13 +1,12 @@
 package com.front.zkoos.module.ratings;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.front.zkoos.module.form.dto.GeneralDto;
-import com.front.zkoos.module.form.dto.RatingFormatDto;
-import com.front.zkoos.module.form.dto.RatingGeneralDto;
+import com.front.zkoos.module.form.data.Ratings;
+import com.front.zkoos.module.ratings.dto.GeneralDto;
+import com.front.zkoos.module.ratings.dto.RatingFormatDto;
+import com.front.zkoos.module.ratings.dto.RatingGeneralDto;
 import com.front.zkoos.util.connection.ConnectionService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -21,7 +20,6 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.zkoss.zk.ui.select.annotation.WireVariable;
 
 @Service
 public class RatingsService implements IRatingService{

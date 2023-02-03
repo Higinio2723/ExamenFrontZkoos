@@ -1,4 +1,4 @@
-<window title="Search" width="1000px" border="normal"
+<window title="Search" width="1000px" border="normal" height="600px"
 	apply="com.front.zkoos.module.form.SearchController">
 	<hbox align="center">
 		Id Alumno:
@@ -8,24 +8,26 @@
 		<button id="updateBtn" label="Editar" />
 		<button id="deleteBtn" label="Eliminar" />
 	</hbox>
-	<listbox id="ratingListbox" emptyMessage="No se encontro información" height="260px" style="margin-top:10px">
+
+	<listbox id="ratingListbox" emptyMessage="No se encontro información" height="400px" style="margin-top:10px"
+			  mold="paging" pageSize="4" >
 		<listhead>
 			<listheader label="Id Alumno"/>
 			<listheader label="Nombre"/>
 			<listheader label="Apellido"/>
 			<listheader label="Materia"/>
 			<listheader label="Calificación"/>
-			<listheader label="Fecha de registro"/>			
+			<listheader label="Fecha de registro"/>
 		</listhead>
 		<template name="model">
 			<listitem>
+
 				<listcell label="${each.id_t_usuario}"></listcell>
 				<listcell label="${each.nombre}"></listcell>
 				<listcell label="${each.apellido}"></listcell>
 				<listcell label="${each.materia}"></listcell>
 				<listcell label="${each.calificacion}"></listcell>
 				<listcell label="${each.fecha_registro}"></listcell>
-
 			</listitem>
 		</template>
 	</listbox>

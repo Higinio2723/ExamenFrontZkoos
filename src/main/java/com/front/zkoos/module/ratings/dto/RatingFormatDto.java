@@ -1,4 +1,4 @@
-package com.front.zkoos.module.form.dto;
+package com.front.zkoos.module.ratings.dto;
 
 import lombok.*;
 
@@ -8,6 +8,7 @@ import lombok.*;
 @Data
 public class RatingFormatDto {
 
+   private Integer id_calificacion;
    private Integer id_t_usuario;
    private String nombre;
    private String apellido;

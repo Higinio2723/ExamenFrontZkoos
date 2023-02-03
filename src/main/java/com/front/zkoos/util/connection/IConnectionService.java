@@ -1,7 +1,7 @@
 package com.front.zkoos.util.connection;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.front.zkoos.module.form.dto.GeneralDto;
+import com.front.zkoos.module.ratings.dto.GeneralDto;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;

@@ -1,4 +1,4 @@
-package com.front.zkoos.module.form.dto;
+package com.front.zkoos.module.ratings.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,10 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class GeneralDto {
+public class RatingsErrorDto {
 
-    private String success;
-
-    private String msg;
+    private String status;
+    private String message;
 
 }

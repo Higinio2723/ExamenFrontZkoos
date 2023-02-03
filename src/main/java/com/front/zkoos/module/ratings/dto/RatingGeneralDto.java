@@ -1,4 +1,4 @@
-package com.front.zkoos.module.form.dto;
+package com.front.zkoos.module.ratings.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,5 +16,7 @@ public class RatingGeneralDto {
   private List<RatingFormatDto> listData;
 
   private Double promedio;
+
+
 
 }

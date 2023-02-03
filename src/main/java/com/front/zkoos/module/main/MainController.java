@@ -7,15 +7,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-    @GetMapping("/main")
-    public String main() {
-        return "form_main";
-    }
-
     @GetMapping("/listData")
     public String listData() {
         return "search_ratings";
         
+    }
+
+    @GetMapping("/report")
+    public String report() {
+        return "jasperreport";
+
     }
 
 }
